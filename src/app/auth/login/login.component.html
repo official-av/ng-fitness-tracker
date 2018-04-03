@@ -11,6 +11,12 @@
       <mat-error *ngIf="!loginForm.get('password').value">Password shouldn't be empty</mat-error>
       <mat-error>Password is Invalid</mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Submit</button>
+
+    <button *ngIf="!isLoading;else Spinner" type="submit" mat-raised-button color="primary"
+            [disabled]="!loginForm.valid">Submit
+    </button>
+    <ng-template #Spinner>
+      <mat-spinner></mat-spinner>
+    </ng-template>
   </form>
 </section>

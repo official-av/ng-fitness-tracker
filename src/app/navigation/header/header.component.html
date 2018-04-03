@@ -4,11 +4,11 @@
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-  <div><a routerLink="/">LOGO</a></div>
+  <div><a routerLink="/">WholeFit</a></div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxLayoutGap="10px" fxHide.xs>
-    <a routerLink="/signup">Signup</a>
-    <a routerLink="/login">Login</a>
-    <a routerLink="/training">Training</a>
-    <a>Logout</a>
+    <a *ngIf="!isAuth" routerLink="/signup">Signup</a>
+    <a *ngIf="!isAuth" routerLink="/login">Login</a>
+    <a *ngIf="isAuth" routerLink="/training">Training</a>
+    <a *ngIf="isAuth" (click)="authService.logout()">Logout</a>
   </div>
 </mat-toolbar>

@@ -1,23 +1,23 @@
 <section fxLayout fxLayoutAlign="center center">
-  <mat-card class="new-training" fxFlex.xs="100vw" fxFlex="400px">
-    <mat-card-title fxLayoutAlign="center">Time to start a workout</mat-card-title>
-    <mat-card-content fxLayoutAlign="center">
-      <mat-form-field>
-        <mat-select placeholder="Select Training">
-          <mat-option value="Crunches">
-            Crunches
-          </mat-option>
-          <mat-option value="Side Lunges">
-            Side Lunges
-          </mat-option>
-          <mat-option value="Push-Ups">
-            Push-Ups
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions fxLayoutAlign="center">
-      <button mat-button type="submit" (click)="onStartTraining()">Start</button>
-    </mat-card-actions>
-  </mat-card>
+  <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
+    <mat-card class="new-training" fxFlex.xs="100vw" fxFlex="400px">
+      <mat-card-title fxLayoutAlign="center">Time to start a workout</mat-card-title>
+      <mat-card-content fxLayoutAlign="center">
+        <mat-form-field *ngIf="exercises!=null">
+          <mat-select placeholder="Select Training" ngModel name="exercise" required>
+            <mat-option *ngFor="let training of exercises" [value]="training.id">
+              {{training.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-spinner *ngIf="!uiService.exercisesFetched"></mat-spinner>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="center">
+        <button *ngIf="exercises!=null" mat-button type="submit" [disabled]="f.invalid">Start</button>
+        <button *ngIf="exercises==null&&uiService.exercisesFetched" mat-button type="button" (click)="fetchExercises()">
+          Fetch Again
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
 </section>
