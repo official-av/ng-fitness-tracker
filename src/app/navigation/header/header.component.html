@@ -6,9 +6,9 @@
   </div>
   <div><a routerLink="/">WholeFit</a></div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxLayoutGap="10px" fxHide.xs>
-    <a *ngIf="!isAuth" routerLink="/signup">Signup</a>
-    <a *ngIf="!isAuth" routerLink="/login">Login</a>
-    <a *ngIf="isAuth" routerLink="/training">Training</a>
-    <a *ngIf="isAuth" (click)="authService.logout()">Logout</a>
+    <a *ngIf="!(isAuth$|async)" routerLink="/signup">Signup</a>
+    <a *ngIf="!(isAuth$|async)" routerLink="/login">Login</a>
+    <a *ngIf="isAuth$|async" routerLink="/training">Training</a>
+    <a *ngIf="isAuth$|async" (click)="authService.logout()">Logout</a>
   </div>
 </mat-toolbar>
